@@ -1,0 +1,71 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                |
+| \\      /  F ield         | cfMesh: A library for mesh generation          | 
+|  \\    /   O peration     |                                                |
+|   \\  /    A nd           | Author: Franjo Juretic                         | 
+|    \\/     M anipulation  | E-mail: franjo.juretic@c-fields.com            |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version   2.0;
+    format    ascii;
+    class     dictionary;
+    location  "system";
+    object    meshDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+surfaceFile "bentPipe.fms";
+maxCellSize 0.0025;
+minCellSize 0.002;
+boundaryCellSize 0.002;
+keepCellsIntersectingBoundary 0;
+
+objectRefinements
+{
+}
+
+localRefinement
+{
+}
+
+
+boundaryLayers
+{
+	patchBoundaryLayers
+	{
+		"walls.*"
+		{
+			nLayers	1;
+			thicknessRatio	1.1;
+			maxFirstLayerThickness 0.002;
+			allowDiscontinuity 1;
+		}
+	}
+}
+
+renameBoundary
+{
+	newPatchNames
+	{
+		"inlet.*"
+		{
+			newName inlet;
+			type patch;
+		}
+		"outlet.*"
+		{
+			newName outlet;
+			type patch;
+		}
+		"walls.*"
+		{
+			newName walls;
+			type wall;
+		}
+	}
+}
+
+// ************************************************************************* //
